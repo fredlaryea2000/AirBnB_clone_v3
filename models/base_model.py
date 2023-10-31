@@ -1,4 +1,3 @@
-ble File  89 lines (79 sloc)  2.89 KB
 #!/usr/bin/python3
 '''
     This module defines the BaseModel class
@@ -69,7 +68,7 @@ class BaseModel:
         models.storage.new(self)
         models.storage.save()
 
-    def to_dict(self, save_to_disk=False):
+    def to_dict(self):
         '''
             Return dictionary representation of BaseModel class.
         '''
@@ -79,8 +78,6 @@ class BaseModel:
         cp_dct['created_at'] = self.created_at.strftime("%Y-%m-%dT%H:%M:%S.%f")
         if hasattr(self, "_sa_instance_state"):
             del cp_dct["_sa_instance_state"]
-        if cp_dct['__class__'] is "User" and not save_to_disk:
-            cp_dct.pop("_password", None)
         return (cp_dct)
 
     def delete(self):
